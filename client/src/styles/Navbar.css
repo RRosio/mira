@@ -1,0 +1,32 @@
+nav {
+    display: flex;
+    flex: row;
+    flex-wrap: nowrap;
+    padding: 10px;
+    max-height: 50px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+}
+
+img {
+    max-width: 40%;
+    max-height: 40%;
+    min-height: 45px;
+    min-width: 45px;
+}
+
+button {
+    max-height: 20px;
+}
+.findButton {
+    display: flex;
+    justify-content: right;
+}
+
+.favoritesButton {
+    display: flex;
+    justify-content: left;
+}
