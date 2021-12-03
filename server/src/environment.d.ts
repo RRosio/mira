@@ -9,6 +9,9 @@ declare global {
       NODE_ENV: 'development' | 'production';
       BASE_URL: string;
       MONGO_URI: string;
+      MONGO_PWD: string;
+      MONGO_DB_NAME: string;
+      MONGO_DB_USER: string;
     }
   }
 }
