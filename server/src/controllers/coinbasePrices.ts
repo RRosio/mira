@@ -1,6 +1,6 @@
 import { pricesObject } from "../interfaces/coinbaseInterfaces";
 
-coinnbaseLoginOauthController: pricesObject = {
+export const coinnbaseLoginOauthController: pricesObject = {
     getPrices: () => {
         console.log("coinbase oauth controller called");
         fetch(process.env.AUTHORIZE_URL)
