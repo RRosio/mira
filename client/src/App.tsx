@@ -1,13 +1,19 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './styles/App.css';
+import Home from './containers/Home';
+import LoginMain from './containers/LoginMain'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-    
-      </header>
-    </div>
+    <Router>
+      <main className="App">
+        <Routes>
+          <Route path="/coinbase" element={<LoginMain/>}/>
+          <Route path="/" element={<Home/>}/>
+        </Routes>
+      </main>
+    </Router>
   );
 }
 

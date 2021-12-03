@@ -1,5 +1,7 @@
+import { FC } from 'react';
 import { Grid } from '@material-ui/core';
-const HomeFavorites = () => {
+
+const HomeFavorites : FC = () => {
 
     return (
         <main>

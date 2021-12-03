@@ -1,8 +1,9 @@
 import { Grid, Button } from '@material-ui/core';
+import { FC } from 'react';
 import logo from '../icons/logo.svg';
 import '../styles/Navbar.css';
 
-const Navbar = () => {
+const Navbar: FC = () => {
 
     return (
         <nav>
@@ -19,7 +20,7 @@ const Navbar = () => {
                     <Button>View Favorites</Button>
                 </Grid>
                 <Grid item xs={2}>
-                    Login
+                    <Button>Login</Button>
                 </Grid>
             </Grid>
         </nav>

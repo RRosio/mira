@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { Grid } from '@material-ui/core';
 
-const HomeSearch = () => {
+const HomeSearch : FC = () => {
     const [testState, setTestState] = useState("");
 
     useEffect(() => {
-        fetch('/')
+        fetch('/hi')
         .then(response => response.json())
         .then(data => {
             setTestState(data.server);
-                console.log('data: ', data);
+            console.log('data: ', data);
         });
     }, []);
 

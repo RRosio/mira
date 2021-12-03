@@ -1,6 +1,7 @@
 import express, { Express, Request, Response, Errback, NextFunction } from 'express';
 import cors from 'cors';
 import coinbaseRouter from './routes/coinbaseRouter';
+
 const PORT: string | number = process.env.PORT || 8080;
 const app: Express = express();
 

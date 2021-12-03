@@ -7,6 +7,7 @@ declare global {
       AUTHORIZE_URL: string;
       PORT?: string;
       NODE_ENV: 'development' | 'production';
+      BASE_URL: string;
     }
   }
 }

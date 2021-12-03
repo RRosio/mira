@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core';
+import { FC } from 'react';
 
-const Footer = () => {
+const Footer : FC = () => {
 
     return (
         <footer>
