@@ -1,9 +1,12 @@
 import express, { Express, Request, Response, Errback, NextFunction } from 'express';
 import cors from 'cors';
 import coinbaseRouter from './routes/coinbaseRouter';
-
+const { mongoose } = require('mongoose');
 const PORT: string | number = process.env.PORT || 8080;
 const app: Express = express();
+const uri = process.env.MONGO_URI;
+
+mongoose.connect(uri);
 
 app.use(cors());
 app.use(express.json());

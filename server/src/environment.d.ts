@@ -8,6 +8,7 @@ declare global {
       PORT?: string;
       NODE_ENV: 'development' | 'production';
       BASE_URL: string;
+      MONGO_URI: string;
     }
   }
 }

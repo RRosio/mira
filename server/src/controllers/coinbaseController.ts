@@ -1,7 +1,8 @@
 // import { oAuthObject } from "../interfaces/coinbaseInterfaces";
 import axios, { AxiosResponse } from 'axios';
 import { Request, Response, NextFunction } from 'express';
-
+import { CoinFavorite } from "../interfaces/favorite";
+import Favorite from "../models/favorite";
 // export const coinbaseLoginOauthController: oAuthObject = {
 //     coinbaseLoginGet: async (req: Request, res: Response, next: NextFunction) => {
 //         console.log("coinbase oauth controller called");
@@ -22,8 +23,18 @@ const getCoinbaseLogin = async (req: Request, res: Response, next: NextFunction)
         console.log('result from axios: ', result);
         return next();
     } catch (error) {
-        res.json({ error })
+        res.json({ error });
     }
 };
 
-export { getCoinbaseLogin }
+const getFavorites = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const favorites: CoinFavorite[] = await Favorite.find();
+        res.status(200).json({ favorites });
+        return next();
+    } catch (error) {
+        res.json({ error });
+    }
+} 
+
+export { getCoinbaseLogin, getFavorites }
