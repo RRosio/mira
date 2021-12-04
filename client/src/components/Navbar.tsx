@@ -2,9 +2,10 @@ import { Grid, Button } from '@material-ui/core';
 import { FC } from 'react';
 import logo from '../icons/logo.svg';
 import '../styles/Navbar.css';
+import { Link } from 'react-router-dom';
 
 const Navbar: FC = () => {
-
+    
     return (
         <nav>
             <Grid container>
@@ -20,7 +21,7 @@ const Navbar: FC = () => {
                     <Button>View Favorites</Button>
                 </Grid>
                 <Grid item xs={2}>
-                    <Button>Login</Button>
+                    <Button><Link to={"/coinbase"}>Login</Link></Button>
                 </Grid>
             </Grid>
         </nav>

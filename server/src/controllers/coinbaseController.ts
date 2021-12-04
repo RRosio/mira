@@ -21,7 +21,7 @@ const getCoinbaseLogin = async (req: Request, res: Response, next: NextFunction)
     try {
         const result : AxiosResponse = await axios.get(process.env.AUTHORIZE_URL);
         console.log('result from axios: ', result);
-        return next();
+        res.status(200).send({ server: "is working yay"});
     } catch (error) {
         res.json({ error });
     }
