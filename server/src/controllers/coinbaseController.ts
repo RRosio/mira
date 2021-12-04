@@ -20,7 +20,7 @@ const getCoinbaseLogin = async (req: Request, res: Response, next: NextFunction)
     console.log("in getCoinbaseLogin controller function");
     try {
         const result : AxiosResponse = await axios.get(process.env.AUTHORIZE_URL);
-        console.log('result from axios: ', result);
+        console.log('result from axios: ', result.data);
         next()
     } catch (error) {
         res.json({ error });
