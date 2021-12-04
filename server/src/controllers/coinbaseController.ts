@@ -17,11 +17,11 @@ import Favorite from "../models/favorite";
 // };
 
 const getCoinbaseLogin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    console.log("in getCoinbaseLogin");
+    console.log("in getCoinbaseLogin controller function");
     try {
         const result : AxiosResponse = await axios.get(process.env.AUTHORIZE_URL);
         console.log('result from axios: ', result);
-        res.status(200).send({ server: "is working yay"});
+        next()
     } catch (error) {
         res.json({ error });
     }
