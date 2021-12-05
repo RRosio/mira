@@ -1,0 +1,11 @@
+/* .SearchDiv {
+    min-height: 30px;
+    min-width: 200px;
+    vertical-align: middle;
+}*/
+.SearchContainer {
+    display: flex;
+    flex: column;
+    flex-flow: column wrap;
+}
+

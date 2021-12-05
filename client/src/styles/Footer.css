@@ -1,0 +1,13 @@
+.FooterContainer {
+    display: flex;
+    align-items: space-between;
+    justify-content: center;
+}
+
+.FooterItem {
+    padding-bottom: 10px;
+}
+
+.footer {
+  height: 50px;
+}

@@ -1,0 +1,7 @@
+.chart {
+    min-height: calc(100vh);
+}
+Line {
+    min-height: calc(100vh);
+    min-width: calc(100vh);
+}
