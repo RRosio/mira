@@ -1,4 +1,10 @@
 /// <reference types="react-scripts" />
+import * as _d3 from 'd3';
+
+declare global {
+  const d3: typeof _d3;
+}
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -16,4 +22,5 @@ declare global {
     }
   }
 }
+
 export {}
