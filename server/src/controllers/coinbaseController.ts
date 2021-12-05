@@ -49,7 +49,22 @@ const getCoinbaseUserInfo = async (req: Request, res: Response, next: NextFuncti
     } catch (error) {
         res.sendStatus(400);
     }
-}
+};
+
+const getPrices = async (req: Request, res: Response, next: NextFunction) => {
+    const price_type = 'spot';//res.locals.price_type;
+    const currency = 'USD';//res.locals.currency;
+    try {
+        const { data } = await axios.get(
+            `https://api.coinbase.com/v2/prices/${price_type}?currency=${currency}`
+        );
+        console.log('data from getPrices: ', data);
+    } catch (error) {
+        console.log('error getting prices from coinbase: ', error);
+        res.sendStatus(400);
+    }
+    res.send(200);
+};
 
 const getFavorites = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -59,6 +74,6 @@ const getFavorites = async (req: Request, res: Response, next: NextFunction) => 
     } catch (error) {
         res.json({ error });
     }
-} 
+};
 
-export { getCoinbaseOauthToken, getCoinbaseUserInfo, getFavorites }
+export { getCoinbaseOauthToken, getCoinbaseUserInfo, getPrices, getFavorites }

@@ -2,6 +2,8 @@ import express, { Express, Request, Response, Errback, NextFunction } from 'expr
 require('dotenv').config();
 import cors from 'cors';
 import coinbaseRouter from './routes/coinbaseRouter';
+import coinbasePricesRouter from './routes/coinbasePricesRouter';
+import axios from 'axios';
 import { mongoConnect } from './models/db';
 
 const PORT: string | number = process.env.PORT || 8080;
@@ -14,6 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/coinbase/signin', coinbaseRouter);
+
+app.use('/coinbase/prices', coinbasePricesRouter);
 
 app.use('/hi', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
