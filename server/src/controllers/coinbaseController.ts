@@ -57,11 +57,11 @@ const getPrices = async (req: Request, res: Response, next: NextFunction) => {
             `https://api.coinbase.com/v2/prices/${price_type}?currency=${currency}`
         );
         console.log('data from getPrices: ', data);
+        res.locals.prices = data;
     } catch (error) {
         console.log('error getting prices from coinbase: ', error);
         res.sendStatus(400);
     }
-    res.send(200);
 };
 
 const getCurrnecies = async (req: Request, res: Response, next: NextFunction) => {
@@ -70,11 +70,11 @@ const getCurrnecies = async (req: Request, res: Response, next: NextFunction) =>
             'https://api.coinbase.com/v2/currencies'
         );
         console.log('data from currencies: ', data);
+        res.locals.currencies = data;
     } catch (error) {
         console.log('error getting currencies: ', error);
         res.sendStatus(400);
     }
-    res.send(200);
 };
 
 const getExchangeRates = async (req: Request, res: Response, next: NextFunction) => {
@@ -83,11 +83,11 @@ const getExchangeRates = async (req: Request, res: Response, next: NextFunction)
             'https://api.coinbase.com/v2/exchange-rates'
         );
         console.log('exchange rates data: ', data);
+        res.locals.exchangeRates = data;
     } catch (error) {
         console.log('error getting currencies: ', error);
         res.sendStatus(400);
     }
-    res.send(200);
 };
 
 const getSellPrice = async (req: Request, res: Response, next: NextFunction) => {
@@ -98,11 +98,11 @@ const getSellPrice = async (req: Request, res: Response, next: NextFunction) => 
             `https://api.coinbase.com/v2/prices/:${interest_coin}-${currency}/sell`
         );
         console.log('sell price data: ', data);
+        res.locals.sellPrice = data;
     } catch (error) {
         console.log('error getting sell price: ', error);
         res.sendStatus(400);
     }
-    res.send(200);
 };
 
 // CURRENT MARKET PRICE
@@ -114,11 +114,11 @@ const getSpotPrice = async (req: Request, res: Response, next: NextFunction) => 
             `https://api.coinbase.com/v2/prices/:${interest_coin}-${currency}/spot`
         );
         console.log('spot price data: ', data);
+        res.locals.currentSpotPrice = data;
     } catch (error) {
         console.log('error getting spot price: ', error);
         res.sendStatus(400);
     }
-    res.send(200);
 };
 
 // HISTORIC MARKET PRICE
@@ -131,11 +131,11 @@ const getHistoricSpotPrice = async (req: Request, res: Response, next: NextFunct
             `https://api.coinbase.com/v2/prices/:${interest_coin}-${currency}/spot/`
         );
         console.log('spot price data: ', data);
+        res.locals.historicSpotPrice = data;
     } catch (error) {
         console.log('error getting spot price: ', error);
         res.sendStatus(400);
     }
-    res.send(200);
 };
 
 export { getCoinbaseOauthToken, getCoinbaseUserInfo, getPrices, getCurrnecies, getExchangeRates, getSellPrice, getSpotPrice, getHistoricSpotPrice }
