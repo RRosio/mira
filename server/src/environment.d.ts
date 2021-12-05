@@ -5,7 +5,6 @@ declare global {
       COINBASE_CLIENT_SECRET: string;
       COINBASE_REDIRECT_URI: string;
       SECURE_RANDOM: string;
-      AUTHORIZE_URL: string;
       PORT?: string;
       NODE_ENV: 'development' | 'production';
       BASE_URL: string;

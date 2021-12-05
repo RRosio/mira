@@ -1,7 +1,8 @@
 import { Grid, Button } from '@material-ui/core';
 import CoinbaseIcon from './CoinbaseIcon';
 import { FC } from 'react';
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 const LoginMain : FC = () => {
 
@@ -19,17 +20,22 @@ const LoginMain : FC = () => {
 
     // const navigate = useNavigate();
 
-    const authorization = () => {
-        fetch('/coinbase/signin', { method: 'GET', redirect: 'follow'})
-        .then(response => {
-            console.log(response);
-            response.json();
-        })
-        .then(data => console.log('data: ', data))
-        .catch(err => {
-            console.log('error: ', err);
-        });
-        return;
+    // const redirect = () => {
+    //     fetch('/coinbase/signin', { method: 'GET', redirect: 'follow'})
+    //     .then(response => {
+    //         console.log(response);
+    //         response.json();
+    //     })
+    //     .then(data => console.log('data: ', data))
+    //     .catch(err => {
+    //         console.log('error: ', err);
+    //     });
+    //     return;
+    // }
+
+    const redirect = () => {
+        window.location.href = process.env.REACT_APP_AUTHORIZE_URL;
+        return null;
     }
 
     return (
@@ -39,7 +45,7 @@ const LoginMain : FC = () => {
                     <h2>Log in to your Coinbase Account</h2>
                 </Grid>
                 <Grid item xs={12}>
-                    <Button onClick={authorization}>
+                    <Button onClick={redirect}>
                         <CoinbaseIcon/>
                     </Button>
                 </Grid>

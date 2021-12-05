@@ -5,7 +5,7 @@ declare global {
       COINBASE_CLIENT_ID: string;
       COINBASE_CLIENT_SECRET: string;
       SECURE_RANDOM: string;
-      AUTHORIZE_URL: string;
+      REACT_APP_AUTHORIZE_URL: string;
       PORT?: string;
       NODE_ENV: 'development' | 'production';
       BASE_URL: string;
