@@ -4,7 +4,7 @@ import cors from 'cors';
 import coinbaseRouter from './routes/coinbaseRouter';
 import { mongoConnect } from './models/db';
 import axios from 'axios';
-import { native } from 'pg';
+
 const PORT: string | number = process.env.PORT || 8080;
 const app: Express = express();
 
