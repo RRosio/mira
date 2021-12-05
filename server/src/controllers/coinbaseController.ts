@@ -1,7 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
 import { Request, Response, NextFunction } from 'express';
-import { CoinFavorite } from "../interfaces/favorite";
-import Favorite from "../models/favorite";
 require('dotenv').config();
 
 const getCoinbaseOauthToken = async (req: Request, res: Response, next: NextFunction) => {
@@ -66,14 +64,78 @@ const getPrices = async (req: Request, res: Response, next: NextFunction) => {
     res.send(200);
 };
 
-const getFavorites = async (req: Request, res: Response, next: NextFunction) => {
+const getCurrnecies = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const favorites: CoinFavorite[] = await Favorite.find();
-        res.status(200).json({ favorites });
-        return next();
+        const { data } = await axios.get(
+            'https://api.coinbase.com/v2/currencies'
+        );
+        console.log('data from currencies: ', data);
     } catch (error) {
-        res.json({ error });
+        console.log('error getting currencies: ', error);
+        res.sendStatus(400);
     }
+    res.send(200);
 };
 
-export { getCoinbaseOauthToken, getCoinbaseUserInfo, getPrices, getFavorites }
+const getExchangeRates = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { data } = await axios.get(
+            'https://api.coinbase.com/v2/exchange-rates'
+        );
+        console.log('exchange rates data: ', data);
+    } catch (error) {
+        console.log('error getting currencies: ', error);
+        res.sendStatus(400);
+    }
+    res.send(200);
+};
+
+const getSellPrice = async (req: Request, res: Response, next: NextFunction) => {
+    const interest_coin = 'BTC';//res.locals.interest_coin;
+    const currency = 'USD';//res.locals.currency;
+    try {
+        const { data } = await axios.get(
+            `https://api.coinbase.com/v2/prices/:${interest_coin}-${currency}/sell`
+        );
+        console.log('sell price data: ', data);
+    } catch (error) {
+        console.log('error getting sell price: ', error);
+        res.sendStatus(400);
+    }
+    res.send(200);
+};
+
+// CURRENT MARKET PRICE
+const getSpotPrice = async (req: Request, res: Response, next: NextFunction) => {
+    const interest_coin = 'BTC';//res.locals.interest_coin;
+    const currency = 'USD';//res.locals.currency;
+    try {
+        const { data } = await axios.get(
+            `https://api.coinbase.com/v2/prices/:${interest_coin}-${currency}/spot`
+        );
+        console.log('spot price data: ', data);
+    } catch (error) {
+        console.log('error getting spot price: ', error);
+        res.sendStatus(400);
+    }
+    res.send(200);
+};
+
+// HISTORIC MARKET PRICE
+const getHistoricSpotPrice = async (req: Request, res: Response, next: NextFunction) => {
+    const interest_coin = 'BTC';//res.locals.interest_coin;
+    const currency = 'USD';//res.locals.currency;
+    const date = '2021-01-01';//res.locals.date YYYY-MM-DD
+    try {
+        const { data } = await axios.get(
+            `https://api.coinbase.com/v2/prices/:${interest_coin}-${currency}/spot/`
+        );
+        console.log('spot price data: ', data);
+    } catch (error) {
+        console.log('error getting spot price: ', error);
+        res.sendStatus(400);
+    }
+    res.send(200);
+};
+
+export { getCoinbaseOauthToken, getCoinbaseUserInfo, getPrices, getCurrnecies, getExchangeRates, getSellPrice, getSpotPrice, getHistoricSpotPrice }

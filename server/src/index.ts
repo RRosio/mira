@@ -16,8 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/coinbase/signin', coinbaseRouter);
-
 app.use('/coinbase/prices', coinbasePricesRouter);
+
 
 app.use('/hi', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
