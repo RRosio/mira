@@ -123,7 +123,7 @@ const getSpotPrice = async (req: Request, res: Response, next: NextFunction) => 
             `https://api.coinbase.com/v2/prices/${interest_coin}-${currency}/spot`
         );
         // console.log('spot price data: ', data);
-        console.log('spot price data: ');
+        // console.log('spot price data: ');
         res.locals.currentSpotPrice = data;
         next();
     } catch (error) {
@@ -134,18 +134,20 @@ const getSpotPrice = async (req: Request, res: Response, next: NextFunction) => 
 
 // HISTORIC MARKET PRICE
 const getHistoricSpotPrice = async (req: Request, res: Response, next: NextFunction) => {
-    const interest_coin = 'BTC';//res.locals.interest_coin;
-    const currency = 'USD';//res.locals.currency;
-    const days = 183;//res.locals.date YYYY-MM-DD
+    console.log('req.body: ', req.body.input);
+    const crypto_curency = 'BTC';
+    const user_currency = req.body.input;
+    const days = 183;
     try {
         const { data } = await axios.get(
-            `https://api.coinbase.com/v2/prices/${interest_coin}-${currency}/historic?days=${days}`
+            `https://api.coinbase.com/v2/prices/${crypto_curency}-${user_currency}/historic?days=${days}`
         );
-        console.log('spot price data: ', data);
+        // console.log('spot price data: ', data);
+        console.log('spot price data: ');
         res.locals.historicSpotPrice = data;
         next();
     } catch (error) {
-        console.log('error getting spot price: ', error);
+        console.log('error getting historic spot price: ', error);
         res.sendStatus(400);
     }
 };

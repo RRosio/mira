@@ -1,51 +1,74 @@
-import { Grid, Select, MenuItem, FormControl, InputLabel, Autocomplete } from '@mui/material';
-import SearchBar from "material-ui-search-bar";
+import { Grid, TextField, Autocomplete } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { FC } from 'react';
 import '../styles/CoinSearchBar.css';
 
 const CoinSearchBar : FC<{currencies:string[]}> = ({currencies}) => {
-    const [value, setValueState] = useState("");
-    const [items, setItemsState] = useState([<MenuItem></MenuItem>]);
-    console.log('currencies from coin search bar: ', currencies);
-    useEffect(() => {
-        const results = currencies.filter(currency => {
-            return currency.toUpperCase().includes(value);
-        });
-        console.log('search results: ', results);
-        const items = generateMenuItems(results);
-        console.log('items ', items);
-        setItemsState(items);
-    }, [value, currencies]);
+    const [choice, setChoiceState] = useState("");
+    const [input, setInputState] = useState("");
+    const [pricesArray, setPricesArrayState] = useState([""]);
+    const [timesArray, setTimesArrayState] = useState([""]);
 
-    const generateMenuItems = (results: string[]) => {
-        const conditional : Array<JSX.Element> = [];
+    const getCurrencyHistoricalData = () => {
+        fetch('/coinbase/prices/history', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ "input": input })})
+        .then(response => response.json())
+        .then(data => {
+            // setCurrenciesData(data);
+            // console.log('data: ', data);
+            
+            const historicData = data[Object.keys(data)[0]].data;
+            // console.log('historicData: ', historicData);
+            
+            // base: string, currency: string, prices: array of objects with price and time (time needs to be reformatted)
+            const { base, currency, prices } = historicData;
+            // console.log('prices: ', prices[2]);
+            const pricesTempArr = [];
+            const timesTempArr = [];
 
-        for(let i = 0; i < results.length; i++){
-            conditional.push(
-                <MenuItem key={i} value={results[i]}>
-                    {results[i]}
-                </MenuItem>
-            );
-        }
-        return conditional;
-    };
+            for(let i = 0; i < prices.length; i++){
+                const price = prices[i].price;
+                let time = prices[i].time;
+                const parsedTime = time.split('T')[0];
+                console.log('parsedTime: ', parsedTime);
+                pricesTempArr.push(price);
+                timesTempArr.push(parsedTime);
+            }
+
+            setPricesArrayState(pricesTempArr);
+            setTimesArrayState(timesTempArr);
         
+        }).catch(err => {
+            console.log('error: ', err);
+        });
+    }
+
+    useEffect(() => {
+       if(input !== '' && input && input.length >= 2 && input !== choice){
+           getCurrencyHistoricalData();
+           setChoiceState(input);
+       } 
+    }, [choice, input]);
+    console.log('prices: ', pricesArray);
     return (
         <>
             <Grid className="SearchContainer" container>
                 <Grid item>
-                    <SearchBar
-                    value={value}
-                    onChange={(newValue) => setValueState(newValue)}/>
+                   <Autocomplete
+                    disablePortal
+                    id="coin-options"
+                    options={currencies}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => <TextField {...params} label="Currency" />}
+                    inputValue={input}
+                    onInputChange={(e, newVal) => {
+                        setInputState(newVal);
+                    }}
+                    onChange={(e, val) => {
+                        console.log('val: ', val);
+                    }}
+                   />
                 </Grid>
             </Grid>
-            <FormControl>
-                <InputLabel>Coin Id</InputLabel>
-                <Select>
-                    {items}
-                </Select>
-            </FormControl>
         </>
     );
 }
