@@ -9,10 +9,10 @@
 
 // export default coinbaseRouter;
 import express from 'express';
-import { getCoinbaseCode } from '../controllers/coinbaseController';
+import { getCoinbaseOauthToken } from '../controllers/coinbaseController';
 const coinbaseRouter = express.Router();
 
-coinbaseRouter.get('/', getCoinbaseCode, (req, res) => {
+coinbaseRouter.get('/', getCoinbaseOauthToken, (req, res) => {
     console.log('in router');
     return res.send(200);
 });
