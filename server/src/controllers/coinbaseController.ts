@@ -56,21 +56,25 @@ const getPrices = async (req: Request, res: Response, next: NextFunction) => {
         const { data } = await axios.get(
             `https://api.coinbase.com/v2/prices/${price_type}?currency=${currency}`
         );
-        console.log('data from getPrices: ', data);
+        // console.log('data from getPrices: ', data);
+        console.log('data from getPrices: ');
         res.locals.prices = data;
+        next();
     } catch (error) {
         console.log('error getting prices from coinbase: ', error);
         res.sendStatus(400);
     }
 };
 
-const getCurrnecies = async (req: Request, res: Response, next: NextFunction) => {
+const getCurrencies = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { data } = await axios.get(
             'https://api.coinbase.com/v2/currencies'
         );
-        console.log('data from currencies: ', data);
+        // console.log('data from currencies: ', data);
+        console.log('data from currencies: ');
         res.locals.currencies = data;
+        next();
     } catch (error) {
         console.log('error getting currencies: ', error);
         res.sendStatus(400);
@@ -84,6 +88,7 @@ const getExchangeRates = async (req: Request, res: Response, next: NextFunction)
         );
         console.log('exchange rates data: ', data);
         res.locals.exchangeRates = data;
+        next();
     } catch (error) {
         console.log('error getting currencies: ', error);
         res.sendStatus(400);
@@ -97,8 +102,10 @@ const getSellPrice = async (req: Request, res: Response, next: NextFunction) => 
         const { data } = await axios.get(
             `https://api.coinbase.com/v2/prices/:${interest_coin}-${currency}/sell`
         );
-        console.log('sell price data: ', data);
+        // console.log('sell price data: ', data);
+        console.log('sell price data: ');
         res.locals.sellPrice = data;
+        next();
     } catch (error) {
         console.log('error getting sell price: ', error);
         res.sendStatus(400);
@@ -111,10 +118,12 @@ const getSpotPrice = async (req: Request, res: Response, next: NextFunction) => 
     const currency = 'USD';//res.locals.currency;
     try {
         const { data } = await axios.get(
-            `https://api.coinbase.com/v2/prices/:${interest_coin}-${currency}/spot`
+            `https://api.coinbase.com/v2/prices/${interest_coin}-${currency}/spot`
         );
-        console.log('spot price data: ', data);
+        // console.log('spot price data: ', data);
+        console.log('spot price data: ');
         res.locals.currentSpotPrice = data;
+        next();
     } catch (error) {
         console.log('error getting spot price: ', error);
         res.sendStatus(400);
@@ -132,10 +141,11 @@ const getHistoricSpotPrice = async (req: Request, res: Response, next: NextFunct
         );
         console.log('spot price data: ', data);
         res.locals.historicSpotPrice = data;
+        next();
     } catch (error) {
         console.log('error getting spot price: ', error);
         res.sendStatus(400);
     }
 };
 
-export { getCoinbaseOauthToken, getCoinbaseUserInfo, getPrices, getCurrnecies, getExchangeRates, getSellPrice, getSpotPrice, getHistoricSpotPrice }
+export { getCoinbaseOauthToken, getCoinbaseUserInfo, getPrices, getCurrencies, getExchangeRates, getSellPrice, getSpotPrice, getHistoricSpotPrice }
