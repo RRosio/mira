@@ -73,7 +73,9 @@ const getCurrencies = async (req: Request, res: Response, next: NextFunction) =>
         );
         // console.log('data from currencies: ', data);
         console.log('data from currencies: ');
-        res.locals.currencies = data;
+        const currencies = data[Object.keys(data)[0]];
+        console.log('spot price data currencies: ', currencies);
+        res.locals.currencies = currencies;
         next();
     } catch (error) {
         console.log('error getting currencies: ', error);
@@ -134,10 +136,10 @@ const getSpotPrice = async (req: Request, res: Response, next: NextFunction) => 
 const getHistoricSpotPrice = async (req: Request, res: Response, next: NextFunction) => {
     const interest_coin = 'BTC';//res.locals.interest_coin;
     const currency = 'USD';//res.locals.currency;
-    const date = '2021-01-01';//res.locals.date YYYY-MM-DD
+    const days = 183;//res.locals.date YYYY-MM-DD
     try {
         const { data } = await axios.get(
-            `https://api.coinbase.com/v2/prices/:${interest_coin}-${currency}/spot/`
+            `https://api.coinbase.com/v2/prices/${interest_coin}-${currency}/historic?days=${days}`
         );
         console.log('spot price data: ', data);
         res.locals.historicSpotPrice = data;

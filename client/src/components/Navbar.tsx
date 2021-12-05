@@ -1,8 +1,9 @@
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button } from '@mui/material';
 import { FC } from 'react';
 import logo from '../icons/logo.svg';
 import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
+import CoinSearchBar from './CoinSearchBar';
 
 const Navbar: FC = () => {
     
@@ -14,10 +15,10 @@ const Navbar: FC = () => {
                         <img src={logo} alt='Mirad logo to navigate to home page'></img>
                     </a> 
                 </Grid>
-                <Grid className="findButton" item xs={4}>
-                    <Button>Find Coins</Button>
+                <Grid className="findButton" item xs={6}>
+                    <CoinSearchBar/>
                 </Grid>
-                <Grid className="favoritesButton" item xs={4}>
+                <Grid className="favoritesButton" item xs={2}>
                     <Button>View Favorites</Button>
                 </Grid>
                 <Grid item xs={2}>

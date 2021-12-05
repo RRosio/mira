@@ -1,6 +1,8 @@
 // import { useState, useEffect, FC } from 'react';
 import { FC } from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, Paper, List } from '@mui/material';
+import { useState, useEffect } from 'react';
+import '../styles/HomeSearch.css';
 
 const HomeSearch : FC = () => {
     // const [testState, setTestState] = useState("");
@@ -24,7 +26,7 @@ const HomeSearch : FC = () => {
     //         console.log('data: ', data);
     //     });
     // }, []);
-    const getInfo : any = async () => {
+    const getInfo = async () => {
         const data = await fetch('/coinbase/prices')
         .then(response => {
             return response.json();
@@ -33,20 +35,50 @@ const HomeSearch : FC = () => {
             console.log('data in fetch: ', data);
             
         });
-        console.log('data at last: ', data);
     };
+
+    const [currenciesName, setCurrenciesName] = useState([""]);
+    const [currenciesId, setCurrenciesId] = useState([""]);
+
+    const getListOfCurrencies = () => {
+        fetch('/coinbase/currencies')
+        .then(response => response.json())
+        .then(data => {
+            // setCurrenciesData(data);
+            // console.log('data: ', data);
+            let currencyNames = [];
+            let currencyIds = [];
+            const currencies = data[Object.keys(data)[0]];
+            console.log('currencies: ', currencies);
+            
+            for(let i = 0; i < currencies.length; i++){
+                currencyNames.push(currencies[i].name);
+                currencyIds.push(currencies[i].id);
+            }
+
+            setCurrenciesName(currencyNames);
+            setCurrenciesId(currencyIds);
+        }).catch(err => {
+            console.log('error: ', err);
+        });
+    }
+    
+    useEffect(() => {
+        getListOfCurrencies();
+    }, []);
+
 
     return (
         <main>
-            <Grid container>
-                <Grid container item xs={12} md={4}>
+            <Grid className="HomeContainer">
+                <Grid className="HomeItem" item xs={12} md={6}>
                     <Grid item>
                        <Button onClick={getInfo}>Grab price info</Button>
                     </Grid>
                 </Grid>
-                <Grid container item xs={12} md={8}>
+                <Grid className="HomeItem" item xs={12} md={6}>
                     <Grid item>
-                        Title
+                        <Button onClick={getInfo}>Grab price info</Button>
                     </Grid>
                 </Grid>
             </Grid>

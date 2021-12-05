@@ -1,4 +1,4 @@
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button } from '@mui/material';
 import CoinbaseIcon from './CoinbaseIcon';
 import { FC } from 'react';
 import dotenv from 'dotenv';

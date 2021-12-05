@@ -1,0 +1,9 @@
+.HomeContainer {
+    display: flex;
+    align-items: space-between;
+    justify-content: center;
+}
+
+.HomeItem {
+    padding-bottom: 20px;
+}

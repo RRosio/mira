@@ -1,0 +1,9 @@
+.FooterContainer {
+    display: flex;
+    align-items: space-between;
+    justify-content: center;
+}
+
+.FooterItem {
+    padding-bottom: 20px;
+}

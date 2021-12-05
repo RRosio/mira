@@ -3,6 +3,7 @@ require('dotenv').config();
 import cors from 'cors';
 import coinbaseRouter from './routes/coinbaseRouter';
 import coinbasePricesRouter from './routes/coinbasePricesRouter';
+import coinbaseCurrenciesRouter from './routes/coinbaseCurrenciesRouter';
 import axios from 'axios';
 import { mongoConnect } from './models/db';
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/coinbase/signin', coinbaseRouter);
 app.use('/coinbase/prices', coinbasePricesRouter);
+app.use('/coinbase/currencies', coinbaseCurrenciesRouter);
 
 
 app.use('/hi', (req, res) => {
