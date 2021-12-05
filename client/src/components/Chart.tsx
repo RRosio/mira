@@ -11,7 +11,6 @@ import {
   Legend,
 } from 'chart.js';
 import '../styles/Chart.css';
-// import { useEffect, useState } from 'react';
 
 const Chart = () => {
     ChartJS.register(
@@ -41,58 +40,13 @@ const Chart = () => {
             }
         ]
     }
-    // const getInfo = async () => {
-    //     const data = await fetch('/coinbase/prices')
-    //     .then(response => {
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         console.log('data in fetch: ', data);
-            
-    //     });
-    //     console.log('data at last: ', data);
-    // };
-    // const regenerateData = () => {
-    //     Takes in array of objects: {id: string, min_size: string, name: string}
-    // };
-    
-    // const [currenciesName, setCurrenciesName] = useState([""]);
-    // const [currenciesId, setCurrenciesId] = useState([""]);
-
-    // const getListOfCurrencies = () => {
-    //     fetch('/coinbase/currencies')
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         // setCurrenciesData(data);
-    //         // console.log('data: ', data);
-    //         let currencyNames = [];
-    //         let currencyIds = [];
-    //         const currencies = data[Object.keys(data)[0]];
-    //         console.log('currencies: ', currencies);
-            
-    //         for(let i = 0; i < currencies.length; i++){
-    //             currencyNames.push(currencies[i].name);
-    //             currencyIds.push(currencies[i].id);
-    //         }
-
-    //         setCurrenciesName(currencyNames);
-    //         setCurrenciesId(currencyIds);
-    //     }).catch(err => {
-    //         console.log('error: ', err);
-    //     });
-    // }
-    
-    // useEffect(() => {
-    //     getListOfCurrencies();
-    // }, []);
-
 
     return (
          <>
             <Grid className="chart" container>
                 <Grid item xs={12} md={8}>
                     <Grid item>
-                       <Line data={data}/>
+                    <Line data={data}/>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={4}>
@@ -101,7 +55,7 @@ const Chart = () => {
                     </Grid>
                 </Grid>
             </Grid>
-        </>
+        </u>
     );
 }
 
