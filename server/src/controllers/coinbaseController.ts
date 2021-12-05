@@ -16,15 +16,17 @@ import Favorite from "../models/favorite";
 //     }
 // };
 
-const getCoinbaseLogin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+const getCoinbaseCode = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     console.log("in getCoinbaseLogin controller function");
-    try {
-        const result : AxiosResponse = await axios.get(process.env.AUTHORIZE_URL);
-        console.log('result from axios: ', result.data);
-        next()
-    } catch (error) {
-        res.json({ error });
-    }
+    console.log('req.query: ', req.query);
+    next()
+    // try {
+    //     const result : AxiosResponse = await axios.get(process.env.AUTHORIZE_URL);
+    //     console.log('result from axios: ', result.data);
+    //     next()
+    // } catch (error) {
+    //     res.json({ error });
+    // }
 };
 
 const getFavorites = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -37,4 +39,4 @@ const getFavorites = async (req: Request, res: Response, next: NextFunction): Pr
     }
 } 
 
-export { getCoinbaseLogin, getFavorites }
+export { getCoinbaseCode, getFavorites }

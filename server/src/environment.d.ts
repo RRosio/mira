@@ -3,6 +3,7 @@ declare global {
     interface ProcessEnv {
       COINBASE_CLIENT_ID: string;
       COINBASE_CLIENT_SECRET: string;
+      COINBASE_REDIRECT_URI: string;
       SECURE_RANDOM: string;
       AUTHORIZE_URL: string;
       PORT?: string;

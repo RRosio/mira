@@ -9,12 +9,12 @@
 
 // export default coinbaseRouter;
 import express from 'express';
-import { getCoinbaseLogin } from '../controllers/coinbaseController';
+import { getCoinbaseCode } from '../controllers/coinbaseController';
 const coinbaseRouter = express.Router();
 
-coinbaseRouter.get('/', getCoinbaseLogin, (req, res) => {
+coinbaseRouter.get('/', getCoinbaseCode, (req, res) => {
     console.log('in router');
-    return res.status(200).send({ data: "is okay"});
+    return res.send(200);
 });
 
 export default coinbaseRouter;
