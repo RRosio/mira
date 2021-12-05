@@ -7,7 +7,7 @@ require('dotenv').config();
 const getCoinbaseOauthToken = async (req: Request, res: Response, next: NextFunction) => {
     console.log("in getCoinbaseLogin controller function");
     console.log('req.query: ', req.query);
-    console.log('req.query: ', req.query);
+
     const { code } = req.query;
     if(code){
         try{
@@ -19,8 +19,19 @@ const getCoinbaseOauthToken = async (req: Request, res: Response, next: NextFunc
             redirect_uri: process.env.COINBASE_REDIRECT_URI
         });
         console.log('response from axios post to coinbase: ', response);
+        res.locals.data = response.data;
+        next();
 
-        const { access_token, token_type, expires_in, refresh_token, scope, created_at } = response.data;
+        } catch (error) {
+        console.log('error in axios post to coinbase: ', error);
+        res.sendStatus(400);
+        }
+    }
+};
+
+const getCoinbaseUserInfo = async (req: Request, res: Response, next: NextFunction) => {
+    const { access_token, token_type, expires_in, refresh_token, scope, created_at } = res.locals.data;
+    try{
         const { data } = await axios.get(
             'https://api.coinbase.com/v2/user/',
             {
@@ -34,16 +45,11 @@ const getCoinbaseOauthToken = async (req: Request, res: Response, next: NextFunc
         const native_currency = data[Object.keys(data)[0]].native_currency;
         console.log('id: ',id);
         console.log('native_currency: ',native_currency);
-        axios.get('http://localhost:3000/');
-
-        } catch (error) {
-        console.log('error in axios post to coinbase: ', error);
+        next();
+    } catch (error) {
         res.sendStatus(400);
-        }
     }
-    res.send(200);
-};
-
+}
 
 const getFavorites = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -55,4 +61,4 @@ const getFavorites = async (req: Request, res: Response, next: NextFunction) => 
     }
 } 
 
-export { getCoinbaseOauthToken, getFavorites }
+export { getCoinbaseOauthToken, getCoinbaseUserInfo, getFavorites }
