@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './styles/App.css';
 import Home from './containers/Home';
-import LoginMain from './containers/LoginMain'
+import LoginMain from './containers/LoginMain';
 
 const App = () => {
   return (

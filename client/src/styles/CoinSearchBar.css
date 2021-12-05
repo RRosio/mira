@@ -5,6 +5,7 @@
 }*/
 .SearchContainer {
     display: flex;
-    align-items: space-between;
-    justify-content: center;
-} 
+    flex: column;
+    flex-flow: column wrap;
+}
+

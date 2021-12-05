@@ -2,6 +2,7 @@
     display: flex;
     align-items: space-between;
     justify-content: center;
+    padding: 5%;
 }
 
 .HomeItem {

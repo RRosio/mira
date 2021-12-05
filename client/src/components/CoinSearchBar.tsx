@@ -1,7 +1,8 @@
 import { Grid, TextField, Autocomplete } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 import { FC } from 'react';
 import '../styles/CoinSearchBar.css';
+import Chart from './Chart';
 
 const CoinSearchBar : FC<{currencies:string[]}> = ({currencies}) => {
     const [choice, setChoiceState] = useState("");
@@ -36,7 +37,6 @@ const CoinSearchBar : FC<{currencies:string[]}> = ({currencies}) => {
 
             setPricesArrayState(pricesTempArr);
             setTimesArrayState(timesTempArr);
-        
         }).catch(err => {
             console.log('error: ', err);
         });
@@ -48,17 +48,18 @@ const CoinSearchBar : FC<{currencies:string[]}> = ({currencies}) => {
            setChoiceState(input);
        } 
     }, [choice, input]);
-    console.log('prices: ', pricesArray);
+    // console.log('prices: ', pricesArray);
+
     return (
         <>
             <Grid className="SearchContainer" container>
-                <Grid item>
+                <Grid item xs={12}>
                    <Autocomplete
                     disablePortal
                     id="coin-options"
                     options={currencies}
                     sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Currency" />}
+                    renderInput={(params) => <TextField {...params} label="Currency"/>}
                     inputValue={input}
                     onInputChange={(e, newVal) => {
                         setInputState(newVal);
@@ -67,6 +68,9 @@ const CoinSearchBar : FC<{currencies:string[]}> = ({currencies}) => {
                         console.log('val: ', val);
                     }}
                    />
+                </Grid>
+                <Grid className="findButton" item xs={12}>
+                    <Chart prices={pricesArray} times={timesArray}/>
                 </Grid>
             </Grid>
         </>
